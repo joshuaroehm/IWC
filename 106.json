@@ -1,5 +1,5 @@
 [
-  { "id": "1", "name": "John Smith", "school": "Central High", "record": "28-4", "rank": 1 },
+  { "id": "1", "name": "John Washington", "school": "Central High", "record": "28-4", "rank": 1 },
   { "id": "2", "name": "Michael Johnson", "school": "Westview Academy", "record": "25-3", "rank": 2 },
   { "id": "3", "name": "Dave Williams", "school": "Eastside Prep", "record": "26-5", "rank": 3 },
   { "id": "4", "name": "Robert Garcia", "school": "Lincoln High", "record": "23-4", "rank": 4 },
