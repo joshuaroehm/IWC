@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { useColorScheme } from 'react-native';
 
 // Weight class definitions
 const WEIGHT_CLASSES = [
@@ -22,26 +22,29 @@ const WEIGHT_CLASSES = [
 ];
 
 export default function BoysRankingsScreen() {
+  // Get the current theme using the useColorScheme hook
+  const scheme = useColorScheme(); // 'light' or 'dark'
+
   // Navigate to specific weight class screen
   const navigateToWeightClass = (weight: number) => {
     router.push(`/boys/${weight}`);
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Boys Wrestling Rankings</Text>
-      <Text style={styles.subtitle}>Select a weight class</Text>
+    <View style={[styles.container, scheme === 'dark' && styles.darkContainer]}>
+      <Text style={[styles.title, scheme === 'dark' && styles.darkText]}>Boys Wrestling Rankings</Text>
+      <Text style={[styles.subtitle, scheme === 'dark' && styles.darkText]}>Select a weight class</Text>
       
       <ScrollView contentContainerStyle={styles.weightClassContainer}>
         {WEIGHT_CLASSES.map((weightClass) => (
           <TouchableOpacity
             key={weightClass.weight}
-            style={styles.weightClassCard}
+            style={[styles.weightClassCard, scheme === 'dark' && styles.darkCard]}
             onPress={() => navigateToWeightClass(weightClass.weight)}
           >
-            <Ionicons name={weightClass.icon as any} size={28} color="#333" />
-            <Text style={styles.weightText}>{weightClass.weight}</Text>
-            <Text style={styles.poundsText}>lbs</Text>
+            <Text style={styles.emoji}>🤼‍♂️</Text>
+            <Text style={[styles.weightText, scheme === 'dark' && styles.darkText]}>{weightClass.weight}</Text>
+            <Text style={[styles.poundsText, scheme === 'dark' && styles.darkText]}>lbs</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -53,17 +56,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f5f5f5', // Light mode background
+  },
+  darkContainer: {
+    backgroundColor: '#121212', // Dark mode background
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 8,
     textAlign: 'center',
+    color: '#333', // Light mode text color
+  },
+  darkText: {
+    color: '#fff', // Dark mode text color
   },
   subtitle: {
     fontSize: 18,
-    color: '#555',
+    color: '#555', // Light mode text color
     marginBottom: 24,
     textAlign: 'center',
   },
@@ -76,7 +86,7 @@ const styles = StyleSheet.create({
   weightClassCard: {
     width: 100,
     height: 100,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff', // Light mode card background
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
@@ -90,6 +100,11 @@ const styles = StyleSheet.create({
     elevation: 2,
     padding: 10,
   },
+  darkCard: {
+    backgroundColor: '#333', // Dark mode card background
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+  },
   weightText: {
     fontSize: 22,
     fontWeight: 'bold',
@@ -98,5 +113,8 @@ const styles = StyleSheet.create({
   poundsText: {
     fontSize: 14,
     color: '#666',
+  },
+  emoji: {
+    fontSize: 28,
   },
 });
