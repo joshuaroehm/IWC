@@ -11,6 +11,14 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
+        headerStyle: {
+          backgroundColor: colorScheme === 'dark'  ? '#121212' : '#ffffff', // Top bar background
+        },
+        headerTitleStyle: {
+          color: colorScheme === 'dark' ? '#FFA500' : '#000000', // Top bar text
+        },
+        headerTintColor: colorScheme === 'dark' ? '#FFA500' : '#000000', // Back button/icon color
+
         tabBarStyle: {
           backgroundColor: colorScheme === 'dark' ? '#121212' : '#ffffff', // Dark or light background
         },
